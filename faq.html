@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Catalog Booster</title>
+  <meta name="description" content="Frequently asked questions about Catalog Booster — the Shopify app for AI-powered product description optimization." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --border: #1e1e2e;
+      --border-hover: #2e2e4e;
+      --text-primary: #f0f0f8;
+      --text-secondary: #8888aa;
+      --text-muted: #55556a;
+      --accent: #6c63ff;
+      --accent-dim: rgba(108, 99, 255, 0.12);
+      --accent-glow: rgba(108, 99, 255, 0.25);
+      --green: #22c55e;
+      --green-dim: rgba(34, 197, 94, 0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ambient glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(108,99,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 40px 0 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), #9b8fff);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .logo-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text-primary); }
+
+    /* Hero */
+    .hero {
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #9b8fff;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #a78bfa, #6c63ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      max-width: 520px;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 64px 0;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .faq-item:nth-child(1) { animation-delay: 0.05s; }
+    .faq-item:nth-child(2) { animation-delay: 0.10s; }
+    .faq-item:nth-child(3) { animation-delay: 0.15s; }
+    .faq-item:nth-child(4) { animation-delay: 0.20s; }
+    .faq-item:nth-child(5) { animation-delay: 0.25s; }
+    .faq-item:nth-child(6) { animation-delay: 0.30s; }
+    .faq-item:nth-child(7) { animation-delay: 0.35s; }
+    .faq-item:nth-child(8) { animation-delay: 0.40s; }
+    .faq-item:nth-child(9) { animation-delay: 0.45s; }
+    .faq-item:nth-child(10) { animation-delay: 0.50s; }
+
+    .faq-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      color: var(--text-primary);
+    }
+
+    .faq-trigger:hover .faq-q { color: #a78bfa; }
+
+    .faq-q {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      transition: color 0.2s;
+      flex: 1;
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+      color: var(--text-muted);
+    }
+
+    .faq-item.open .faq-icon {
+      background: var(--accent-dim);
+      border-color: rgba(108,99,255,0.3);
+      color: var(--accent);
+      transform: rotate(45deg);
+    }
+
+    .faq-icon svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .faq-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+    }
+
+    .faq-item.open .faq-body {
+      max-height: 400px;
+    }
+
+    .faq-answer {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      padding-bottom: 24px;
+      padding-right: 40px;
+      font-weight: 300;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .shopify-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-dim);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    .shopify-badge::before {
+      content: '✦';
+      font-size: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .nav { padding-bottom: 48px; }
+      h1 { font-size: 36px; }
+      .faq-answer { padding-right: 0; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <nav class="nav">
+        <a href="/" class="logo">
+          <div class="logo-icon">⚡</div>
+          <span class="logo-name">Catalog Booster</span>
+        </a>
+        <a href="https://apps.shopify.com" class="nav-link">Install on Shopify →</a>
+      </nav>
+      <div class="hero">
+        <div class="badge">Support</div>
+        <h1>Frequently<br /><span>asked questions</span></h1>
+        <p class="hero-sub">Everything you need to know about Catalog Booster — how it works, what it costs, and how your data is handled.</p>
+      </div>
+    </header>
+
+    <main class="faq-section">
+      <div class="faq-list" id="faqList">
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">What does Catalog Booster do?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">Catalog Booster scans every product in your Shopify store, scores each product description against SEO and conversion best practices and generates AI-powered improvement proposals — including optimised titles, descriptions, SEO meta fields and feature bullet points. You review each proposal, approve what you like and publish directly to your store with one click.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">How does a catalog scan work?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">When you run a scan, Catalog Booster reads your entire product catalog from Shopify, takes a read-only snapshot of every product and scores each one for content quality. Products that score below the threshold are flagged for improvement and an AI generation job runs to produce proposal fields for each weak product. Scans run in the background — you can leave the page and return when it's done.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">What are proposals and how do I review them?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">A proposal is a set of AI-generated content improvements for a single product. Each proposal contains individual field suggestions (title, description, SEO title, SEO description, feature bullets). You can approve or reject each field independently. Once you approve the fields you want, you can publish them to Shopify in a single batch. Nothing is written to your store until you explicitly publish.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">How does publishing work and is it safe?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">Publishing only writes content that you have explicitly approved. Before any field is updated in Shopify, Catalog Booster saves a rollback snapshot of your original product data. If anything looks wrong after publishing, you can roll back to the previous version from the proposal detail page. No content is ever written to Shopify from a raw scan snapshot — only from your approved proposals.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">What is brand voice calibration and why does it matter?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">Brand voice calibration analyses a sample of your existing product descriptions to automatically detect your writing style, tone, description length preference, use of bullet points, emoji usage and key personality traits. Every AI generation chain uses your active voice profile so that all generated content sounds like it came from your team — not a generic AI. You can also set manual overrides (brand name, target audience, words to avoid) to refine the output. If you have no product scan data yet, you can complete a short questionnaire instead.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">What does "Stale Source" mean on a proposal?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">A proposal is marked Stale when the underlying product in Shopify was updated after the proposal was generated. This means the AI suggestions may no longer reflect the current product data. You can regenerate the proposal to produce fresh suggestions based on the latest product version or reject the proposal if you've already updated the product manually.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">How many scans do I get per month and what if I need more?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">Your base scan allowance depends on your plan: Starter includes 1 scan/month, Growth includes 3 scans/month and Scale includes unlimited scans (fair-use up to 100,000 products/month). If you exceed your base allowance, you can purchase additional scans at an overage rate — $10/scan on Starter, $8/scan on Growth. The app will show you the overage cost and ask for your confirmation before charging. All billing goes through Shopify.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">What is a regeneration and how many do I get?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">A regeneration lets you ask the AI to produce a new version of a single proposal field (for example, a new description or a different SEO title) without re-scanning the entire catalog. Starter allows 2 regenerations per field per billing month, Growth allows 5 and Scale allows unlimited. When a field reaches its limit, its status changes to "Regeneration Limit Reached" and you'll need to either upgrade your plan or wait until the next billing month.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">Is there a limit on how many products the app can handle?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">Starter supports up to 500 products in your catalog, Growth supports up to 3,000 and Scale supports an unlimited catalog. If your product count exceeds your plan's limit, the scan will not run. You'll see a prompt to upgrade your plan. Scale merchants are subject only to a fair-use cap of 100,000 products per scan cycle.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-q">Does Catalog Booster store my product data and how is it used?</span>
+            <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p class="faq-answer">Catalog Booster stores read-only snapshots of your product content (titles, descriptions, SEO fields) in a secure, isolated database scoped exclusively to your shop. This data is used solely to generate proposals and to enable rollback after publishing. It is never shared with other merchants or used to train AI models. Snapshot retention depends on your plan: 10 snapshots on Starter, rolling 30 days on Growth and indefinite archival on Scale.</p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span class="footer-brand">Catalog Booster by Catalog Health</span>
+          <span class="footer-copy">© 2026 Catalog Health. All rights reserved.</span>
+        </div>
+        <a href="https://apps.shopify.com" class="shopify-badge">Available on Shopify App Store</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const items = document.querySelectorAll('.faq-item');
+    items.forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // Close all
+        items.forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        });
+        // Open clicked if it was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
